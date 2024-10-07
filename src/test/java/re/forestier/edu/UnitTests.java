@@ -2,6 +2,7 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -245,6 +246,27 @@ public class UnitTests {
 
 
  /* Les tests ajoutés dans cette partie sont fait pour essayer de passer l'étape 'Mutation' à 100% */
+
+    @Test
+    public void testAfficherJoueurInventory() {
+        // Setup
+        player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        p.inventory.add("Magic Bow");
+        p.inventory.add("Hell Sword");
+
+        // Expected output
+        String expectedOutput = "Joueur Doe joué par John\n" +
+                                "Niveau : 1 (XP totale : 0)\n\n" +
+                                "Capacités :\n   VIS : 3\n   ATK : 3\n   CHA : 1\n   INT : 1\n\n" +
+                                "Inventaire :\n   Magic Bow\n   Hell Sword";
+
+                                // Act
+        String actualOutput = Affichage.afficherJoueur(p);
+
+        // Assert
+        assertEquals(expectedOutput, actualOutput);
+    }
+
 
 }
 
