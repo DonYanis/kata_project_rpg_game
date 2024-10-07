@@ -120,9 +120,7 @@ public class UnitTests {
         assertThat(p.retrieveLevel(), equalTo(4));
         UpdatePlayer.addXp(p, 50);
         assertThat(p.retrieveLevel(), equalTo(5));
-
     }
-
 
     // For capturing System.out.println output
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -148,9 +146,8 @@ public class UnitTests {
         UpdatePlayer.majFinDeTour(p);
 
         // Assert
-        assertEquals("Le joueur est KO !" + System.lineSeparator(), outContent.toString());  // Verify printed output
+        assertEquals("Le joueur est KO !" + System.lineSeparator(), outContent.toString()); 
     }
-
 
     @Test
     @DisplayName("MAJ fin tour : Dwarf with holy elexir")
@@ -185,7 +182,6 @@ public class UnitTests {
 
         assertThat(p.currenthealthpoints, equalTo(2));
     }
-
 
     @Test
     @DisplayName("MAJ fin tour : Adventurer with high level")
@@ -244,28 +240,21 @@ public class UnitTests {
         assertThat(p.currenthealthpoints, equalTo(3));
     }
 
-
-
-
  /* Les tests ajoutés dans cette partie sont fait pour essayer de passer l'étape 'Mutation' à 100% */
 
     @Test
     public void testAfficherJoueurInventory() {
-        // Setup
         player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
         p.inventory.add("Magic Bow");
         p.inventory.add("Hell Sword");
 
-        // Expected output
         String expectedOutput = "Joueur Doe joué par John\n" +
                                 "Niveau : 1 (XP totale : 0)\n\n" +
                                 "Capacités :\n   VIS : 3\n   ATK : 3\n   CHA : 1\n   INT : 1\n\n" +
                                 "Inventaire :\n   Magic Bow\n   Hell Sword";
 
-                                // Act
         String actualOutput = Affichage.afficherJoueur(p);
 
-        // Assert
         assertEquals(expectedOutput, actualOutput);
     }
 
@@ -278,13 +267,11 @@ public class UnitTests {
         
     }
 
-
     @Test
     @DisplayName("retrieve the right level fixed")
     void testRetrieveRightLevelFixed(){
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         
-
         UpdatePlayer.addXp(p, 10);
         assertThat(p.retrieveLevel(), equalTo(2));
 
@@ -294,9 +281,7 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 30);
         assertThat(p.retrieveLevel(), equalTo(4));
 
-
     }
-
 
     @Test
     public void testAddXp_LevelUp() {
@@ -309,7 +294,6 @@ public class UnitTests {
         assertEquals(2, p.retrieveLevel()); // Check new level
     }
 
-
     @Test
     @DisplayName("update inventory after leveling up")
     public void testAddXp_InventoryUpdate() {
@@ -318,7 +302,6 @@ public class UnitTests {
 
         assertFalse(p.inventory.isEmpty()); // Inventory should have an item
     }
-
 
     @Test
     @DisplayName("MAJ fin tour Mutation : current health doesnt change")
@@ -330,12 +313,4 @@ public class UnitTests {
 
         assertThat(p.currenthealthpoints, equalTo(2));
     }
-
-
-
 }
-
-
-
-
-
