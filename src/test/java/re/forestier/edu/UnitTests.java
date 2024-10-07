@@ -7,6 +7,8 @@ import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -293,6 +295,40 @@ public class UnitTests {
         assertThat(p.retrieveLevel(), equalTo(4));
 
 
+    }
+
+
+    @Test
+    public void testAddXp_LevelUp() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+
+        assertFalse(UpdatePlayer.addXp(p, 1)); 
+
+        // Now add enough XP to level up
+        assertTrue(UpdatePlayer.addXp(p, 11)); // This should level up the player
+        assertEquals(2, p.retrieveLevel()); // Check new level
+    }
+
+
+    @Test
+    @DisplayName("update inventory after leveling up")
+    public void testAddXp_InventoryUpdate() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        UpdatePlayer.addXp(p, 20);
+
+        assertFalse(p.inventory.isEmpty()); // Inventory should have an item
+    }
+
+
+    @Test
+    @DisplayName("MAJ fin tour Mutation : current health doesnt change")
+    public void testCurrentHealthDoesNotChangeMutation() {
+        player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        p.currenthealthpoints = 2;
+        p.healthpoints = 4;
+        UpdatePlayer.majFinDeTour(p);
+
+        assertThat(p.currenthealthpoints, equalTo(2));
     }
 
 
