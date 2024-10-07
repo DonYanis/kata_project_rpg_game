@@ -7,6 +7,7 @@ import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -266,6 +267,17 @@ public class UnitTests {
         // Assert
         assertEquals(expectedOutput, actualOutput);
     }
+
+     @Test
+    public void testRemoveAllMoney() {
+        player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        p.removeMoney(100);
+
+        assertEquals(0, p.money); 
+        
+    }
+
+
 
 
 }
