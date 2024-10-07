@@ -277,6 +277,24 @@ public class UnitTests {
     }
 
 
+    @Test
+    @DisplayName("retrieve the right level fixed")
+    void testRetrieveRightLevelFixed(){
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        
+
+        UpdatePlayer.addXp(p, 10);
+        assertThat(p.retrieveLevel(), equalTo(2));
+
+        UpdatePlayer.addXp(p, 17);
+        assertThat(p.retrieveLevel(), equalTo(3));
+
+        UpdatePlayer.addXp(p, 30);
+        assertThat(p.retrieveLevel(), equalTo(4));
+
+
+    }
+
 
 
 }
