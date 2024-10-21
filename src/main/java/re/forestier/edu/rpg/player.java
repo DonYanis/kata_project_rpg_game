@@ -9,14 +9,11 @@ public class player {
     private String AvatarClass;
 
     public Integer money;
-    private Float __real_money__;
-
 
     public int level;
     public int healthpoints;
     public int currenthealthpoints;
     protected int xp;
-
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
@@ -72,16 +69,4 @@ public class player {
     public int getXp() {
         return this.xp;
     }
-
-    /*
-    Ингредиенты:
-        Для теста:
-
-            250 г муки
-            125 г сливочного масла (холодное)
-            70 г сахара
-            1 яйцо
-            1 щепотка соли
-     */
-
 }
