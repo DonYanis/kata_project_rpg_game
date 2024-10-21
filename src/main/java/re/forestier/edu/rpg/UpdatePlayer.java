@@ -98,23 +98,32 @@ public class UpdatePlayer {
         return abilitiesPerTypeAndLevel;
     }
 
+    //Refactor addXp
+    //1- extract giving new object 
+
+    private static void giveRandomObject(player player) {
+        Random random = new Random();
+        player.inventory.add(objectList[random.nextInt(objectList.length)]);
+    }
+
+    //2- extract updating abilities
+    private static void upgradePlayerAbilities(player player, int newLevel) {
+        HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel()
+            .get(player.getAvatarClass())
+            .get(newLevel);
+        
+        abilities.forEach(player.abilities::put);
+    }
+    
+    //3- the final refactored method
     public static boolean addXp(player player, int xp) {
         int currentLevel = player.retrieveLevel();
         player.xp += xp;
         int newLevel = player.retrieveLevel();
 
         if (newLevel != currentLevel) {
-            // Player leveled-up!
-            // Give a random object
-            ;
-            Random random = new Random();
-            player.inventory.add(objectList[random.nextInt(objectList.length - 0) + 0]);
-
-            // Add/upgrade abilities to player
-            HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(newLevel);
-            abilities.forEach((ability, level) -> {
-                player.abilities.put(ability, abilities.get(ability));
-            });
+            giveRandomObject(player);
+            upgradePlayerAbilities(player, newLevel);
             return true;
         }
         return false;
