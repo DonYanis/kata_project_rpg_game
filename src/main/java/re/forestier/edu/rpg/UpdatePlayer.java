@@ -120,47 +120,69 @@ public class UpdatePlayer {
         return false;
     }
 
-    // majFinDeTour met à jour les points de vie
+    //refactor MAJ fin tour : 
+    //1- extract health modification : 
+    private static void applyDwarfHealthBonus(player player) {
+        if(player.inventory.contains("Holy Elixir")) {
+            player.currenthealthpoints += 1;
+        }
+        player.currenthealthpoints += 1;
+    }
+    
+    private static void applyAdventurerHealthBonus(player player) {
+        player.currenthealthpoints += 2;
+        if(player.retrieveLevel() < 3) {
+            player.currenthealthpoints -= 1; 
+        }
+    }
+    
+    private static void applyArcherHealthBonus(player player) {
+        player.currenthealthpoints += 1;
+        if(player.inventory.contains("Magic Bow")) {
+            player.currenthealthpoints += (player.currenthealthpoints / 8) - 1;
+        }
+    }
+
+    //2- apply health modification according to player
+    private static void applyClassHealthBonus(player player) {
+        switch (player.getAvatarClass()) {
+            case "DWARF":
+                applyDwarfHealthBonus(player);
+                break;
+            case "ADVENTURER":
+                applyAdventurerHealthBonus(player);
+                break;
+            case "ARCHER":
+                applyArcherHealthBonus(player);
+                break;
+            default:
+                break;
+        }
+    }
+
+    //3- extract the part that caps the health
+    private static void capHealthAtMaximum(player player) {
+        if (player.currenthealthpoints > player.healthpoints) {
+            player.currenthealthpoints = player.healthpoints; 
+        }
+    }
+
+    //4- now code the new MAJf fin de tour function
     public static void majFinDeTour(player player) {
-        if(player.currenthealthpoints == 0) {
+
+        // Check if player is KO
+        if (player.currenthealthpoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
-
-        if(player.currenthealthpoints < player.healthpoints/2) {
-            if(!player.getAvatarClass().equals("ADVENTURER")) {
-                if(player.getAvatarClass().equals("DWARF")) {
-                    if(player.inventory.contains("Holy Elixir")) {
-                        player.currenthealthpoints+=1;
-                    }
-                    player.currenthealthpoints+=1;
-                } else if(player.getAvatarClass().equals("ADVENTURER")) {
-                    player.currenthealthpoints+=2;
-                }
-
-
-                if(player.getAvatarClass().equals("ARCHER")) {
-                    player.currenthealthpoints+=1;
-                    if(player.inventory.contains("Magic Bow")) {
-                        player.currenthealthpoints+=player.currenthealthpoints/8-1;
-                    }
-                }
-            } else {
-                player.currenthealthpoints+=2;
-                if(player.retrieveLevel() < 3) {
-                    player.currenthealthpoints-=1;
-                }
-            }
-        } else if(player.currenthealthpoints >= player.healthpoints/2){
-            if(player.currenthealthpoints >= player.healthpoints) {
-                player.currenthealthpoints = player.healthpoints;
-                return;
-            }
+    
+        // Apply health restoration logic if below half health
+        if (player.currenthealthpoints < player.healthpoints / 2) {
+            applyClassHealthBonus(player);  // Handle class-specific health bonuses
         }
-
-
-        if(player.currenthealthpoints >= player.healthpoints) {
-            player.currenthealthpoints = player.healthpoints;
-        }
+    
+        // Ensure the health doesn't exceed the max health
+        capHealthAtMaximum(player);
     }
+
 }
