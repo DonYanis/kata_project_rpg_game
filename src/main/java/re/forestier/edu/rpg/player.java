@@ -19,9 +19,6 @@ public class player {
     public ArrayList<String> inventory;
 
     public player(String playerName, String avatar_name, String avatarClassName, int money, ArrayList<String> inventory) {
-        if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
-            return;
-        }
 
         this.playerName = playerName;
         this.Avatar_name = avatar_name;
