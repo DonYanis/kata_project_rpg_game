@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class player {
     public String playerName;
     public String Avatar_name;
-    private String AvatarClass;
+    private AvatarClass avatarClass;
 
     public Integer money;
 
@@ -17,21 +17,24 @@ public class player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
+
+    public player(String playerName, String avatar_name, String avatarClassName, int money, ArrayList<String> inventory) {
         if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
             return;
         }
 
         this.playerName = playerName;
-        Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
-        this.money = Integer.valueOf(money);
-        this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.Avatar_name = avatar_name;
+        this.avatarClass = AvatarClassFactory.getAvatarClass(avatarClassName);
+        this.money = money;
+        this.inventory = inventory != null ? inventory : new ArrayList<>();
+        this.level = 1;
+        this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(level));
+
     }
 
-    public String getAvatarClass () {
-        return AvatarClass;
+    public AvatarClass getAvatarClass() {
+        return avatarClass;
     }
 
     public void removeMoney(int amount) throws IllegalArgumentException {
