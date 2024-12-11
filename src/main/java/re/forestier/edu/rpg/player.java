@@ -23,6 +23,8 @@ public class player {
         this.playerName = playerName;
         this.Avatar_name = avatar_name;
         this.avatarClass = AvatarClassFactory.getAvatarClass(avatarClassName);
+        if (this.avatarClass == null) return;
+
         this.money = money;
         this.inventory = inventory != null ? inventory : new ArrayList<>();
         this.level = 1;
@@ -30,8 +32,13 @@ public class player {
 
     }
 
-    public AvatarClass getAvatarClass() {
+    
+    public AvatarClass getAvatarClassObject() {
         return avatarClass;
+    }
+
+    public String getAvatarClass() {
+        return avatarClass != null ? avatarClass.getName() : null;
     }
 
     public void removeMoney(int amount) throws IllegalArgumentException {

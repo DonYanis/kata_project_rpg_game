@@ -22,7 +22,7 @@ public class UpdatePlayer {
 
         if (newLevel != currentLevel) {
             giveRandomObject(player);
-            player.getAvatarClass().updateAbilities(player, newLevel); 
+            player.getAvatarClassObject().updateAbilities(player, newLevel); 
 
             return true;
         }
@@ -48,7 +48,7 @@ public class UpdatePlayer {
     
         // Apply health restoration logic if below half health
         if (player.currenthealthpoints < player.healthpoints / 2) {
-            player.getAvatarClass().applyHealthBonus(player);
+            player.getAvatarClassObject().applyHealthBonus(player);
         }
     
         // Ensure the health doesn't exceed the max health

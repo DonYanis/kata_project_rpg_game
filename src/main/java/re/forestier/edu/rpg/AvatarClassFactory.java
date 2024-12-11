@@ -11,9 +11,6 @@ public class AvatarClassFactory {
     );
 
     public static AvatarClass getAvatarClass(String className) {
-        if (!classMap.containsKey(className)) {
-            throw new IllegalArgumentException("Unknown class: " + className);
-        }
         return classMap.get(className);
     }
 }
