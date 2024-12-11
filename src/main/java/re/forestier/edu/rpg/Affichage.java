@@ -1,19 +1,26 @@
 package re.forestier.edu.rpg;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Affichage {
 
-    public static String afficherJoueur(player player) {
-        final String[] finalString = {"Joueur " + player.Avatar_name + " joué par " + player.playerName};
-        finalString[0] += "\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";
-        finalString[0] += "\n\nCapacités :";
-        player.abilities.forEach((name, level) -> {
-            finalString[0] += "\n   " + name + " : " + level;
-        });
-        finalString[0] += "\n\nInventaire :";
-        player.inventory.forEach(item -> {
-            finalString[0] += "\n   " + item;
-        });
+    private static final List<String> abilityOrder = Arrays.asList("DEF","VIS", "ATK", "CHA", "INT", "ALC");
 
-        return finalString[0];
+    public static String afficherJoueur(player player) {
+        final StringBuilder finalString = new StringBuilder("Joueur " + player.Avatar_name + " joué par " + player.playerName);
+        finalString.append("\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")");
+        finalString.append("\n\nCapacités :");
+
+        for (String ability : abilityOrder) {
+            if (player.abilities.containsKey(ability)) {
+                finalString.append("\n   " + ability + " : " + player.abilities.get(ability));
+            }
+        }
+
+        finalString.append("\n\nInventaire :");
+        player.inventory.forEach(item -> finalString.append("\n   " + item));
+
+        return finalString.toString();
     }
 }
