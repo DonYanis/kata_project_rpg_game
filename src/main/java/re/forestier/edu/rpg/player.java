@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class player {
     public String playerName;
     public String Avatar_name;
-    private String AvatarClass;
+    private AvatarClass avatarClass;
 
     public Integer money;
 
@@ -17,47 +17,51 @@ public class player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
-        if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
-            return;
-        }
+
+    public player(String playerName, String avatar_name, String avatarClassName, int money, ArrayList<String> inventory) {
 
         this.playerName = playerName;
-        Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
-        this.money = Integer.valueOf(money);
-        this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.Avatar_name = avatar_name;
+        this.avatarClass = AvatarClassFactory.getAvatarClass(avatarClassName);
+        if (this.avatarClass == null) return;
+
+        this.money = money;
+        this.inventory = inventory != null ? inventory : new ArrayList<>();
+        this.level = 1;
+        this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(level));
+
+    }
+    
+    public AvatarClass getAvatarClassObject() {
+        return avatarClass;
     }
 
-    public String getAvatarClass () {
-        return AvatarClass;
+    public String getAvatarClass() {
+        return avatarClass != null ? avatarClass.getName() : null;
     }
 
-    public void removeMoney(int amount) throws IllegalArgumentException {
-        if (money - amount < 0) {
+    public void removeMoney(int amount) {
+        if (money < amount) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
-
-        money = Integer.parseInt(money.toString()) - amount;
+        money -= amount;
     }
+
     public void addMoney(int amount) {
-        var value = Integer.valueOf(amount);
-        money = money + (value != null ? value : 0);
+        money += amount;
     }
 
     public int retrieveLevel() {
-        
-        //xp levels in a sorted list
-        int[] xplvl = { 0, 10, 27, 57 };
-        int lvl = 2;
+        int level = 2;      
+        int previousLvlXp = 0;
 
         while (true) {
-            int requiredXp = (lvl - 1) * 10 + Math.round((lvl * xplvl[ lvl- 2 ]) / 4.0f);
-            if (xp < requiredXp) {
-                return lvl-1; 
+            previousLvlXp = (level - 1) * 10 + Math.round((level * previousLvlXp) / 4);
+
+            if (xp < previousLvlXp) {
+                return level-1;  
             }
-            lvl++;
+            level++;
         }
     }
 
