@@ -31,7 +31,6 @@ public class player {
         this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(level));
 
     }
-
     
     public AvatarClass getAvatarClassObject() {
         return avatarClass;
@@ -41,13 +40,13 @@ public class player {
         return avatarClass != null ? avatarClass.getName() : null;
     }
 
-    public void removeMoney(int amount) throws IllegalArgumentException {
-        if (money - amount < 0) {
+    public void removeMoney(int amount) {
+        if (money < amount) {
             throw new IllegalArgumentException("Player can't have a negative money!");
         }
-
-        money = Integer.parseInt(money.toString()) - amount;
+        money -= amount;
     }
+
     public void addMoney(int amount) {
         var value = Integer.valueOf(amount);
         money = money + (value != null ? value : 0);
