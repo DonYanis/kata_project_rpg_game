@@ -56,7 +56,7 @@ public class player {
         int previousLvlXp = 0;
 
         while (true) {
-            previousLvlXp = (level - 1) * 10 + Math.round((level * previousLvlXp) / 4);
+            previousLvlXp = (level - 1) * 10 + (level * previousLvlXp) / 4;
 
             if (xp < previousLvlXp) {
                 return level-1;  
