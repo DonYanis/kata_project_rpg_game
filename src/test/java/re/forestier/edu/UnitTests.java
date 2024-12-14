@@ -38,7 +38,7 @@ public class UnitTests {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
 
         try {
-            p.removeMoney(200);
+            UpdatePlayer.removeMoney(p, 200);
         } catch (IllegalArgumentException e) {
             return;
         }
@@ -49,7 +49,7 @@ public class UnitTests {
     @DisplayName("add money")
     void testAddMoney(){
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.addMoney((100));
+        UpdatePlayer.addMoney(p, 100);
         assertThat(p.getMoney(), is(200));
     }
 
@@ -57,7 +57,7 @@ public class UnitTests {
     @DisplayName("remove money")
     void testRemoveMoney(){
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.removeMoney((50));
+        UpdatePlayer.removeMoney(p, 50);
         assertThat(p.getMoney(), is(50));
     }
 
@@ -261,8 +261,8 @@ public class UnitTests {
      @Test
     public void testRemoveAllMoney() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.removeMoney(100);
 
+        UpdatePlayer.removeMoney(p, 100);
         assertEquals(0, p.getMoney()); 
         
     }

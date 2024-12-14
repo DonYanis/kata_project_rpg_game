@@ -33,17 +33,6 @@ public class Player {
 
     }
     
-    public void removeMoney(int amount) {
-        if (money < amount) {
-            throw new IllegalArgumentException("Player can't have a negative money!");
-        }
-        money -= amount;
-    }
-
-    public void addMoney(int amount) {
-        money += amount;
-    }
-
     public int retrieveLevel() {
         int level = 2;      
         int previousLvlXp = 0;
