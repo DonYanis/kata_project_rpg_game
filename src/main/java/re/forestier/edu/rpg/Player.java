@@ -3,19 +3,20 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//TODO : public -> protected
 public class Player {
-    public String playerName;
-    public String avatarName;
-    private AvatarClass avatarClass;
+    protected String playerName;
+    protected String avatarName;
+    protected AvatarClass avatarClass;
 
-    public Integer money;
+    protected Integer money;
 
-    public int level;
+    protected int level;
     public int healthPoints;
     public int currentHealthPoints;
     protected int xp;
 
-    public HashMap<String, Integer> abilities;
+    protected HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
     public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
@@ -32,14 +33,6 @@ public class Player {
 
     }
     
-    public AvatarClass getAvatarClassObject() {
-        return avatarClass;
-    }
-
-    public String getAvatarClass() {
-        return avatarClass != null ? avatarClass.getName() : null;
-    }
-
     public void removeMoney(int amount) {
         if (money < amount) {
             throw new IllegalArgumentException("Player can't have a negative money!");
@@ -65,8 +58,43 @@ public class Player {
         }
     }
 
+    public AvatarClass getAvatarClassObject() {
+        return avatarClass;
+    }
+
+    public String getAvatarClass() {
+        return avatarClass != null ? avatarClass.getName() : null;
+    }
+
     public int getXp() {
         return this.xp;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public int getCurrentHealthPoints() {
+        return currentHealthPoints;
+    }
+
+    public HashMap<String, Integer> getAbilities() {
+        return abilities;
+    }
+
+    public ArrayList<String> getInventory() {
+        return inventory;
+    }
 }

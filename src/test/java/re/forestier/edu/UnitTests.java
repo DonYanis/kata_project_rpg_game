@@ -29,7 +29,7 @@ public class UnitTests {
     @DisplayName("Sample test")
     void testPlayerName() {
         Player player = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        assertThat(player.playerName, is("Florian"));
+        assertThat(player.getPlayerName(), is("Florian"));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class UnitTests {
     void testAddMoney(){
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         p.addMoney((100));
-        assertThat(p.money, is(200));
+        assertThat(p.getMoney(), is(200));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class UnitTests {
     void testRemoveMoney(){
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         p.removeMoney((50));
-        assertThat(p.money, is(50));
+        assertThat(p.getMoney(), is(50));
     }
 
     @Test
@@ -158,7 +158,7 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(3));
+        assertThat(p.getCurrentHealthPoints(), equalTo(3));
     }
 
     @Test
@@ -169,7 +169,7 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(2));
+        assertThat(p.getCurrentHealthPoints(), equalTo(2));
     }
 
     @Test
@@ -180,7 +180,7 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(2));
+        assertThat(p.getCurrentHealthPoints(), equalTo(2));
     }
 
     @Test
@@ -192,7 +192,7 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 100);
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(3));
+        assertThat(p.getCurrentHealthPoints(), equalTo(3));
     }
 
     @Test
@@ -204,7 +204,7 @@ public class UnitTests {
         p.healthPoints = 20;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(8));
+        assertThat(p.getCurrentHealthPoints(), equalTo(8));
     }
 
     @Test
@@ -215,7 +215,7 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(2));
+        assertThat(p.getCurrentHealthPoints(), equalTo(2));
     }
 
     @Test
@@ -226,7 +226,7 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(4));
+        assertThat(p.getCurrentHealthPoints(), equalTo(4));
     }
 
     @Test
@@ -237,7 +237,7 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(3));
+        assertThat(p.getCurrentHealthPoints(), equalTo(3));
     }
 
  /* Les tests ajoutés dans cette partie sont fait pour essayer de passer l'étape 'Mutation' à 100% */
@@ -263,7 +263,7 @@ public class UnitTests {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
         p.removeMoney(100);
 
-        assertEquals(0, p.money); 
+        assertEquals(0, p.getMoney()); 
         
     }
 
@@ -300,7 +300,7 @@ public class UnitTests {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         UpdatePlayer.addXp(p, 20);
 
-        assertFalse(p.inventory.isEmpty()); // Inventory should have an item
+        assertFalse(p.getInventory().isEmpty()); // Inventory should have an item
     }
 
     @Test
@@ -311,6 +311,6 @@ public class UnitTests {
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currentHealthPoints, equalTo(2));
+        assertThat(p.getCurrentHealthPoints(), equalTo(2));
     }
 }
