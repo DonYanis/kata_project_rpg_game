@@ -22,10 +22,10 @@ public class Archer implements AvatarClass  {
     }
 
     @Override
-    public  void applyHealthBonus(player player) {
-        player.currenthealthpoints += 1;
+    public  void applyHealthBonus(Player player) {
+        player.currentHealthPoints += 1;
         if(player.inventory.contains("Magic Bow")) {
-            player.currenthealthpoints += (player.currenthealthpoints / 8) - 1;
+            player.currentHealthPoints += (player.currentHealthPoints / 8) - 1;
         }
     }
     

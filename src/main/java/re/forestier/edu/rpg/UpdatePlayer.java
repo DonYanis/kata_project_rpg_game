@@ -9,13 +9,13 @@ public class UpdatePlayer {
     };
 
 
-    private static void giveRandomObject(player player) {
+    private static void giveRandomObject(Player player) {
         Random random = new Random();
         player.inventory.add(objectList[random.nextInt(objectList.length)]);
     }
     
     //3- the final refactored method
-    public static boolean addXp(player player, int xp) {
+    public static boolean addXp(Player player, int xp) {
         int currentLevel = player.retrieveLevel();
         player.xp += xp;
         int newLevel = player.retrieveLevel();
@@ -31,23 +31,23 @@ public class UpdatePlayer {
 
 
     //3- extract the part that caps the health
-    private static void capHealthAtMaximum(player player) {
-        if (player.currenthealthpoints > player.healthpoints) {
-            player.currenthealthpoints = player.healthpoints; 
+    private static void capHealthAtMaximum(Player player) {
+        if (player.currentHealthPoints > player.healthPoints) {
+            player.currentHealthPoints = player.healthPoints; 
         }
     }
 
     //4- now code the new MAJf fin de tour function
-    public static void majFinDeTour(player player) {
+    public static void majFinDeTour(Player player) {
 
         // Check if player is KO
-        if (player.currenthealthpoints == 0) {
+        if (player.currentHealthPoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
     
         // Apply health restoration logic if below half health
-        if (player.currenthealthpoints < player.healthpoints / 2) {
+        if (player.currentHealthPoints < player.healthPoints / 2) {
             player.getAvatarClassObject().applyHealthBonus(player);
         }
     
