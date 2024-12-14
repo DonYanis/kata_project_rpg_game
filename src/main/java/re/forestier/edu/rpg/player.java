@@ -5,23 +5,23 @@ import java.util.HashMap;
 
 public class player {
     public String playerName;
-    public String Avatar_name;
+    public String avatarName;
     private AvatarClass avatarClass;
 
     public Integer money;
 
     public int level;
-    public int healthpoints;
-    public int currenthealthpoints;
+    public int healthPoints;
+    public int currentHealthPoints;
     protected int xp;
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public player(String playerName, String avatar_name, String avatarClassName, int money, ArrayList<String> inventory) {
+    public player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
 
         this.playerName = playerName;
-        this.Avatar_name = avatar_name;
+        this.avatarName = avatarName;
         this.avatarClass = AvatarClassFactory.getAvatarClass(avatarClassName);
         if (this.avatarClass == null) return;
 

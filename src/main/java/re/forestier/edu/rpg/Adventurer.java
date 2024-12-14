@@ -22,9 +22,9 @@ public class Adventurer implements AvatarClass {
 
     @Override
     public void applyHealthBonus(player player) {
-        player.currenthealthpoints += 2;
+        player.currentHealthPoints += 2;
         if (player.retrieveLevel() < 3) {
-            player.currenthealthpoints -= 1;
+            player.currentHealthPoints -= 1;
         }
     }
 }

@@ -141,7 +141,7 @@ public class UnitTests {
     public void testMajFinDeTour_PlayerKO() {
 
         player p = new player("John", "Doe", "DWARF", 100, new ArrayList<>());
-        p.currenthealthpoints = 0; 
+        p.currentHealthPoints = 0; 
 
         UpdatePlayer.majFinDeTour(p);
 
@@ -154,45 +154,45 @@ public class UnitTests {
     public void testMAJFinDwarfHolyElexir() {
         player p = new player("John", "Doe", "DWARF", 100, new ArrayList<>());
         p.inventory.add("Holy Elixir");
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 1;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(3));
+        assertThat(p.currentHealthPoints, equalTo(3));
     }
 
     @Test
     @DisplayName("MAJ fin tour : Dwarf with no holy elexir")
     public void testMAJFinDwarfNoHolyElexir() {
         player p = new player("John", "Doe", "DWARF", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 1;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(2));
+        assertThat(p.currentHealthPoints, equalTo(2));
     }
 
     @Test
     @DisplayName("MAJ fin tour : Adventurer with low level")
     public void testMAJFinAdventurerLowLevel() {
         player p = new player("John", "Doe", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 1;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(2));
+        assertThat(p.currentHealthPoints, equalTo(2));
     }
 
     @Test
     @DisplayName("MAJ fin tour : Adventurer with high level")
     public void testMAJFinAdventurerHighLevel() {
         player p = new player("John", "Doe", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 1;
+        p.healthPoints = 4;
         UpdatePlayer.addXp(p, 100);
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(3));
+        assertThat(p.currentHealthPoints, equalTo(3));
     }
 
     @Test
@@ -200,44 +200,44 @@ public class UnitTests {
     public void testMAJFinArcherMagicBow() {
         player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
         p.inventory.add("Magic Bow");
-        p.currenthealthpoints = 7;
-        p.healthpoints = 20;
+        p.currentHealthPoints = 7;
+        p.healthPoints = 20;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(8));
+        assertThat(p.currentHealthPoints, equalTo(8));
     }
 
     @Test
     @DisplayName("MAJ fin tour : ARCHER with No Magic Bow")
     public void testMAJFinArcherNoMagicBow() {
         player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.currenthealthpoints = 1;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 1;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(2));
+        assertThat(p.currentHealthPoints, equalTo(2));
     }
 
     @Test
     @DisplayName("MAJ fin tour : current health must be inf or equal to health")
     public void testCurrentHealthInfEquToHealth() {
         player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.currenthealthpoints = 5;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 5;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(4));
+        assertThat(p.currentHealthPoints, equalTo(4));
     }
 
     @Test
     @DisplayName("MAJ fin tour : current health doesnt change")
     public void testCurrentHealthDoesNotChange() {
         player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.currenthealthpoints = 3;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 3;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(3));
+        assertThat(p.currentHealthPoints, equalTo(3));
     }
 
  /* Les tests ajoutés dans cette partie sont fait pour essayer de passer l'étape 'Mutation' à 100% */
@@ -307,10 +307,10 @@ public class UnitTests {
     @DisplayName("MAJ fin tour Mutation : current health doesnt change")
     public void testCurrentHealthDoesNotChangeMutation() {
         player p = new player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.currenthealthpoints = 2;
-        p.healthpoints = 4;
+        p.currentHealthPoints = 2;
+        p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
 
-        assertThat(p.currenthealthpoints, equalTo(2));
+        assertThat(p.currentHealthPoints, equalTo(2));
     }
 }

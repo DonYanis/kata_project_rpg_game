@@ -32,8 +32,8 @@ public class UpdatePlayer {
 
     //3- extract the part that caps the health
     private static void capHealthAtMaximum(player player) {
-        if (player.currenthealthpoints > player.healthpoints) {
-            player.currenthealthpoints = player.healthpoints; 
+        if (player.currentHealthPoints > player.healthPoints) {
+            player.currentHealthPoints = player.healthPoints; 
         }
     }
 
@@ -41,13 +41,13 @@ public class UpdatePlayer {
     public static void majFinDeTour(player player) {
 
         // Check if player is KO
-        if (player.currenthealthpoints == 0) {
+        if (player.currentHealthPoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
     
         // Apply health restoration logic if below half health
-        if (player.currenthealthpoints < player.healthpoints / 2) {
+        if (player.currentHealthPoints < player.healthPoints / 2) {
             player.getAvatarClassObject().applyHealthBonus(player);
         }
     
