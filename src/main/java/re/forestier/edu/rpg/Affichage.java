@@ -7,7 +7,7 @@ public class Affichage {
 
     private static final List<String> abilityOrder = Arrays.asList("DEF","VIS", "ATK", "CHA", "INT", "ALC");
 
-    public static String afficherJoueur(player player) {
+    public static String afficherJoueur(Player player) {
         final StringBuilder finalString = new StringBuilder("Joueur " + player.avatarName + " joué par " + player.playerName);
         finalString.append("\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")");
         finalString.append("\n\nCapacités :");

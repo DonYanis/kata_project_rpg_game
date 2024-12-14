@@ -3,7 +3,7 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class player {
+public class Player {
     public String playerName;
     public String avatarName;
     private AvatarClass avatarClass;
@@ -18,7 +18,7 @@ public class player {
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
 
-    public player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
 
         this.playerName = playerName;
         this.avatarName = avatarName;

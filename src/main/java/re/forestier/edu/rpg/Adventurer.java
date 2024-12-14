@@ -21,7 +21,7 @@ public class Adventurer implements AvatarClass {
     }
 
     @Override
-    public void applyHealthBonus(player player) {
+    public void applyHealthBonus(Player player) {
         player.currentHealthPoints += 2;
         if (player.retrieveLevel() < 3) {
             player.currentHealthPoints -= 1;
