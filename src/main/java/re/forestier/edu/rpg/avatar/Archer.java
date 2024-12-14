@@ -1,7 +1,9 @@
-package re.forestier.edu.rpg;
+package re.forestier.edu.rpg.avatar;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import re.forestier.edu.rpg.Player;
 
 public class Archer implements AvatarClass  {
 

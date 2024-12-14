@@ -2,8 +2,9 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import re.forestier.edu.rpg.Affichage;
+
 import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.utils.Affichage;
 import re.forestier.edu.rpg.Player;
 
 import java.util.ArrayList;

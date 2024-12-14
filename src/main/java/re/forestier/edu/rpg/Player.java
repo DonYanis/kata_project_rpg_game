@@ -3,6 +3,9 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import re.forestier.edu.rpg.avatar.AvatarClass;
+import re.forestier.edu.rpg.avatar.AvatarClassFactory;
+
 //TODO : public -> protected
 public class Player {
     protected String playerName;
@@ -53,6 +56,10 @@ public class Player {
 
     public String getAvatarClass() {
         return avatarClass != null ? avatarClass.getName() : null;
+    }
+
+    public String getAvatarName() {
+        return avatarName;
     }
 
     public int getXp() {

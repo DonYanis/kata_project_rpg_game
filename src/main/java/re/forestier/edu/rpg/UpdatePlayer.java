@@ -1,5 +1,6 @@
 package re.forestier.edu.rpg;
 
+import java.util.Map;
 import java.util.Random;
 
 public class UpdatePlayer {
@@ -19,11 +20,16 @@ public class UpdatePlayer {
 
         if (newLevel != currentLevel) {
             giveRandomObject(player);
-            player.getAvatarClassObject().updateAbilities(player, newLevel); 
+            updateAbilities(player, newLevel); 
 
             return true;
         }
         return false;
+    }
+
+    private static void updateAbilities(Player player, int level) {
+        Map<String, Integer> newAbilities = player.avatarClass.getAbilitiesPerLevel().get(level);
+        newAbilities.forEach(player.abilities::put);
     }
 
 
