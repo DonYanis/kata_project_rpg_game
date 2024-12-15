@@ -3,6 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.utils.Affichage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class UnitTests {
 
@@ -314,4 +316,39 @@ public class UnitTests {
 
         assertThat(p.getCurrentHealthPoints(), equalTo(2));
     }
+
+
+
+    // Test before adding Goblin class : 
+    @DisplayName("Test Goblin Name")
+    void testGoblinName() {
+        Player p = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>());
+        assertThat(p.getAvatarClass(), is("GOBLIN"));
+    }
+
+    @Test
+    @DisplayName("Test Goblin Abilities at each Level")
+    void testGetAbilitiesLevel1() {
+        Player p = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>());
+        Map<String, Integer> level1Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(1);
+        Map<String, Integer> level2Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(2);
+        Map<String, Integer> level3Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(3);
+        Map<String, Integer> level4Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(4);
+        Map<String, Integer> level5Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(5);
+
+        assertThat(level1Abilities, hasEntry("ALC", 1));
+        assertThat(level1Abilities, hasEntry("INT", 2));
+        assertThat(level1Abilities, hasEntry("ATK", 2));
+
+        assertThat(level2Abilities, hasEntry("ATK", 3));
+        assertThat(level2Abilities, hasEntry("ALC", 4));
+
+        assertThat(level3Abilities, hasEntry("VIS", 1));
+
+        assertThat(level4Abilities, hasEntry("DEF", 1));
+
+        assertThat(level5Abilities, hasEntry("DEF", 2));
+        assertThat(level5Abilities, hasEntry("ATK", 4));
+    }
+
 }
