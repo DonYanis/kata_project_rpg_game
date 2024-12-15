@@ -7,5 +7,5 @@ import re.forestier.edu.rpg.Player;
 public interface AvatarClass {
     String getName();
     Map <Integer, Map<String, Integer>> getAbilitiesPerLevel();
-    void applyHealthBonus(Player player);
+    default void applyHealthBonus(Player player){};
 }
