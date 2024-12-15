@@ -3,13 +3,16 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.UpdatePlayer;
-import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.utils.Affichage;
+import re.forestier.edu.rpg.object.*;
+import re.forestier.edu.rpg.object.Object;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -351,4 +354,112 @@ public class UnitTests {
         assertThat(level5Abilities, hasEntry("ATK", 4));
     }
 
+    // Test before ceating object package : 
+    @Test
+    @DisplayName("Test Object class getters")
+    void testObjectGetters() {
+        Object object = new Object("Lookout Ring", "Prevents surprise attacks", 1, 50);
+        assertEquals("Lookout Ring", object.getName());
+
+        assertEquals("Prevents surprise attacks", object.getDescription());
+
+        assertEquals(1, object.getWeight());
+
+        assertEquals(50, object.getValue());
+    }
+
+    @Test
+    @DisplayName("Test get object")
+    void testGetObjectByName() {
+        Object object = ObjectList.getObject("Lookout Ring");
+        assertNotNull(object);
+        assertEquals("Lookout Ring", object.getName());
+    }
+
+    @Test
+    @DisplayName("Test get Nonexistent object")
+    void testGetObjectByNameNotFound() {
+        Object object = ObjectList.getObject("Nonexistent Item");
+        assertNull(object);
+    }
+
+    @Test
+    @DisplayName("Test objectlist.contains")
+    void testContains() {
+        assertTrue(ObjectList.contains("Draupnir"));
+        assertFalse(ObjectList.contains("Magic"));
+    }
+
+
+    @Test
+    @DisplayName("random object's weight should be inf or eq to given weight")
+    void testGetRandomObject() {
+        Object randomObject = ObjectList.getRandomObject(2);
+        assertNotNull(randomObject );
+        assertTrue(randomObject.getWeight() < 2);
+    }
+
+    @Test
+    @DisplayName("Object should be null when no objects fit the weight condition")
+    void testGetRandomObjectNoMatching() {
+        Object randomObject = ObjectList.getRandomObject(0);
+        assertNull(randomObject);
+    }
+
+    private Inventory inventory;
+    @BeforeEach
+    void setUpInventory() {
+        inventory = new Inventory();
+        inventory.addObject("Lookout Ring");
+        inventory.addObject("Draupnir");
+        inventory.addObject("Combat Edge");
+    }
+
+    @Test
+    @DisplayName("Test Adding Objects to Inventory")
+    void testAddObject() {
+        assertTrue(inventory.contains("Lookout Ring"), "Inventory should contain 'Lookout Ring'");
+        assertTrue(inventory.contains("Draupnir"), "Inventory should contain 'Draupnir'");
+        assertTrue(inventory.contains("Combat Edge"), "Inventory should contain 'Combat Edge'");
+    }
+
+    @Test
+    @DisplayName("Test Adding Unknown Object")
+    void testAddUnknownObject() {
+        inventory.addObject("Nonexistent Item");
+        assertFalse(inventory.contains("Nonexistent Item"));
+    }
+
+    @Test
+    @DisplayName("Test Removing Object from Inventory")
+    void testRemoveObject() {
+        inventory.remove("Combat Edge");
+        assertFalse(inventory.contains("Combat Edge"));
+    }
+
+
+    @Test
+    @DisplayName("Test Contains Method for Non-Existing Items")
+    void testContainsFalse() {
+        assertFalse(inventory.contains("Nonexistent Item"));
+    }
+
+    @Test
+    @DisplayName("Test Calculating Total Weight of Inventory")
+    void testGetTotalWeight() {
+        assertEquals(4, inventory.getTotalWeight());
+    }
+
+    @Test
+    @DisplayName("Test Calculating Total Value of Inventory")
+    void testGetTotalValue() {
+        assertEquals(180, inventory.getTotalValue());
+    }
+
+    @Test
+    @DisplayName("Test Removing Non-Existent Object from Inventory")
+    void testRemoveNonExistentObject() {
+        inventory.remove("Nonexistent Item"); 
+        assertEquals(3, inventory.getInventory().size());
+    }
 }
