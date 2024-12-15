@@ -6,7 +6,6 @@ import java.util.HashMap;
 import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.avatar.AvatarClassFactory;
 
-//TODO : public -> protected
 public class Player {
     protected String playerName;
     protected String avatarName;
