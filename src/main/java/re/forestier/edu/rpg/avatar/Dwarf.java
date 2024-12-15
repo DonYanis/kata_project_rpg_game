@@ -1,6 +1,5 @@
 package re.forestier.edu.rpg.avatar;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import re.forestier.edu.rpg.Player;
@@ -14,13 +13,13 @@ public class Dwarf implements AvatarClass {
 
     @Override
     public Map<Integer, Map<String, Integer>> getAbilitiesPerLevel() {
-        Map<Integer, Map<String, Integer>> abilities = new HashMap<>();
-        abilities.put(1, Map.of("ALC", 4, "INT", 1, "ATK", 3));
-        abilities.put(2, Map.of("DEF", 1, "ALC", 5));
-        abilities.put(3, Map.of("ATK", 4));
-        abilities.put(4, Map.of("DEF", 2));
-        abilities.put(5, Map.of("CHA", 1));
-        return abilities;
+        return Map.of(
+            1, Map.of("ALC", 4, "INT", 1, "ATK", 3),
+            2, Map.of("DEF", 1, "ALC", 5),
+            3, Map.of("ATK", 4),
+            4, Map.of("DEF", 2),
+            5, Map.of("CHA", 1)
+        );
     }
 
     @Override
