@@ -1,8 +1,9 @@
-package re.forestier.edu.rpg.avatar;
+package re.forestier.edu.rpg.avatar.role;
 
 import java.util.Map;
 
 import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.avatar.AvatarClass;
 
 public class Dwarf implements AvatarClass {
 
