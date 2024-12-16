@@ -113,4 +113,35 @@ public class Player {
     public void clearInventory(){
         inventory.clear();
     }
+
+    public boolean sellObject(String name, Player buyer) {
+
+        Object objectToSell = getSellingObject(name,buyer);
+        if(objectToSell == null ) return false;
+
+        UpdatePlayer.removeMoney(buyer, objectToSell.getValue());
+        money+=objectToSell.getValue();
+        buyer.addObject(name);
+        inventory.remove(name);
+        return true;
+    }
+
+    private Object getSellingObject(String name, Player buyer){
+        if (!inventory.contains(name)) {
+            System.out.println("You do not own this object.");
+            return null;
+        }
+
+        Object objectToSell = ObjectList.getObject(name);
+        if (buyer.getMoney() < objectToSell.getValue()) {
+            System.out.println("Buyer does not have enough money.");
+            return null;
+        }
+
+        if (buyer.getFreeWeight() < objectToSell.getWeight()) {
+            System.out.println("Buyer does not have enough free weight.");
+            return null;
+        }
+        return objectToSell;
+    }
 }
