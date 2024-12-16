@@ -34,14 +34,14 @@ public class UnitTests {
     @Test
     @DisplayName("Sample test")
     void testPlayerName() {
-        Player player = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player player = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         assertThat(player.getPlayerName(), is("Florian"));
     }
 
     @Test
     @DisplayName("Impossible to have negative money")
     void testNegativeMoney() {
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
 
         try {
             UpdatePlayer.removeMoney(p, 200);
@@ -54,7 +54,7 @@ public class UnitTests {
     @Test
     @DisplayName("add money")
     void testAddMoney(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         UpdatePlayer.addMoney(p, 100);
         assertThat(p.getMoney(), is(200));
     }
@@ -62,7 +62,7 @@ public class UnitTests {
     @Test
     @DisplayName("remove money")
     void testRemoveMoney(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         UpdatePlayer.removeMoney(p, 50);
         assertThat(p.getMoney(), is(50));
     }
@@ -71,23 +71,23 @@ public class UnitTests {
     @DisplayName("test avatar class")
     void testAvatar(){
         
-        Player p = new Player("Florian", "Grognak le barbare", "x", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "x", 100, new ArrayList<>(),5);
         assertThat(p.getAvatarClass(),not("x"));
 
-        Player p1 = new Player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>());
+        Player p1 = new Player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>(),5);
         assertThat(p1.getAvatarClass(),equalTo("ARCHER"));
 
-        Player p2 = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p2 = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         assertThat(p2.getAvatarClass(),equalTo("ADVENTURER"));
 
-        Player p3 = new Player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>());
+        Player p3 = new Player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>(),5);
         assertThat(p3.getAvatarClass(),equalTo("DWARF"));
     }
 
     @Test
     @DisplayName("update xp ")
     void testAddXP(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         
         UpdatePlayer.addXp(p, 11);
         assertThat(p.getXp(), equalTo(11));
@@ -96,7 +96,7 @@ public class UnitTests {
     @Test
     @DisplayName("update xp and level up")
     void testAddXPLevelUp(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         
         UpdatePlayer.addXp(p, 11);
         assertThat(p.getXp(), equalTo(11));
@@ -106,7 +106,7 @@ public class UnitTests {
     @Test
     @DisplayName("update xp and no level up")
     void testAddXPNoLevelUp(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         
         UpdatePlayer.addXp(p, 1);
         assertThat(p.retrieveLevel(), equalTo(1));
@@ -115,7 +115,7 @@ public class UnitTests {
     @Test
     @DisplayName("retrieve the right level")
     void testRetrieveRightLevel(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         
         assertThat(p.retrieveLevel(), equalTo(1));
         UpdatePlayer.addXp(p, 11);
@@ -146,7 +146,7 @@ public class UnitTests {
     @DisplayName("player KO")
     public void testMajFinDeTour_PlayerKO() {
 
-        Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 0; 
 
         UpdatePlayer.majFinDeTour(p);
@@ -158,8 +158,8 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : Dwarf with holy elexir")
     public void testMAJFinDwarfHolyElexir() {
-        Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>());
-        p.inventory.add("Holy Elixir");
+        Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
+        p.addObject("Holy Elixir");
         p.currentHealthPoints = 1;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -170,7 +170,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : Dwarf with no holy elexir")
     public void testMAJFinDwarfNoHolyElexir() {
-        Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 1;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -181,7 +181,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : Adventurer with low level")
     public void testMAJFinAdventurerLowLevel() {
-        Player p = new Player("John", "Doe", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ADVENTURER", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 1;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -192,7 +192,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : Adventurer with high level")
     public void testMAJFinAdventurerHighLevel() {
-        Player p = new Player("John", "Doe", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ADVENTURER", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 1;
         p.healthPoints = 4;
         UpdatePlayer.addXp(p, 100);
@@ -204,8 +204,8 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : ARCHER with Magic Bow")
     public void testMAJFinArcherMagicBow() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.inventory.add("Magic Bow");
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
+        p.addObject("Magic Bow");
         p.currentHealthPoints = 7;
         p.healthPoints = 20;
         UpdatePlayer.majFinDeTour(p);
@@ -216,7 +216,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : ARCHER with No Magic Bow")
     public void testMAJFinArcherNoMagicBow() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 1;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -227,7 +227,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : current health must be inf or equal to health")
     public void testCurrentHealthInfEquToHealth() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 5;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -238,7 +238,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour : current health doesnt change")
     public void testCurrentHealthDoesNotChange() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 3;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -250,9 +250,9 @@ public class UnitTests {
 
     @Test
     public void testAfficherJoueurInventory() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
-        p.inventory.add("Magic Bow");
-        p.inventory.add("Hell Sword");
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
+        p.addObject("Magic Bow");
+        p.addObject("Hell Sword");
 
         String expectedOutput = "Joueur Doe joué par John\n" +
                                 "Niveau : 1 (XP totale : 0)\n\n" +
@@ -266,7 +266,7 @@ public class UnitTests {
 
      @Test
     public void testRemoveAllMoney() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
 
         UpdatePlayer.removeMoney(p, 100);
         assertEquals(0, p.getMoney()); 
@@ -276,7 +276,7 @@ public class UnitTests {
     @Test
     @DisplayName("retrieve the right level fixed")
     void testRetrieveRightLevelFixed(){
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         
         UpdatePlayer.addXp(p, 10);
         assertThat(p.retrieveLevel(), equalTo(2));
@@ -291,7 +291,7 @@ public class UnitTests {
 
     @Test
     public void testAddXp_LevelUp() {
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
 
         assertFalse(UpdatePlayer.addXp(p, 1)); 
 
@@ -303,7 +303,7 @@ public class UnitTests {
     @Test
     @DisplayName("update inventory after leveling up")
     public void testAddXp_InventoryUpdate() {
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
         UpdatePlayer.addXp(p, 20);
 
         assertFalse(p.getInventory().isEmpty()); // Inventory should have an item
@@ -312,7 +312,7 @@ public class UnitTests {
     @Test
     @DisplayName("MAJ fin tour Mutation : current health doesnt change")
     public void testCurrentHealthDoesNotChangeMutation() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
         p.currentHealthPoints = 2;
         p.healthPoints = 4;
         UpdatePlayer.majFinDeTour(p);
@@ -325,14 +325,14 @@ public class UnitTests {
     // Test before adding Goblin class : 
     @DisplayName("Test Goblin Name")
     void testGoblinName() {
-        Player p = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>(),5);
         assertThat(p.getAvatarClass(), is("GOBLIN"));
     }
 
     @Test
     @DisplayName("Test Goblin Abilities at each Level")
     void testGetAbilitiesLevel1() {
-        Player p = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>());
+        Player p = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>(),5);
         Map<String, Integer> level1Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(1);
         Map<String, Integer> level2Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(2);
         Map<String, Integer> level3Abilities = p.getAvatarClassObject().getAbilitiesPerLevel().get(3);
@@ -410,9 +410,9 @@ public class UnitTests {
     @BeforeEach
     void setUpInventory() {
         inventory = new Inventory();
-        inventory.addObject("Lookout Ring");
-        inventory.addObject("Draupnir");
-        inventory.addObject("Combat Edge");
+        inventory.addObject("Lookout Ring",10);
+        inventory.addObject("Draupnir",10);
+        inventory.addObject("Combat Edge",10);
     }
 
     @Test
@@ -426,7 +426,7 @@ public class UnitTests {
     @Test
     @DisplayName("Test Adding Unknown Object")
     void testAddUnknownObject() {
-        inventory.addObject("Nonexistent Item");
+        inventory.addObject("Nonexistent Item",10);
         assertFalse(inventory.contains("Nonexistent Item"));
     }
 
@@ -462,4 +462,46 @@ public class UnitTests {
         inventory.remove("Nonexistent Item"); 
         assertEquals(3, inventory.getInventory().size());
     }
+
+    //tests before linking object package to project
+
+    @Test
+    @DisplayName("Test retrieving  maximum weight")
+    void testGetMaxWeight() {
+        Player player = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>(),5);
+        assertEquals(5, player.getMaxWeight());
+    }
+
+    @Test
+    @DisplayName("Test calculating the free weight in the inventory")
+    void testGetFreeWeight() {
+        ArrayList<String> startingItems = new ArrayList<>();
+        startingItems.add("Lookout Ring"); // Weight = 1
+        startingItems.add("Draupnir");     // Weight = 2
+        
+        Player player = new Player("John", "Doe", "GOBLIN", 100, startingItems,10);
+        assertEquals(7, player.getFreeWeight());
+    }
+
+    @Test
+    @DisplayName("Test adding an object that exceeds the free weight")
+    void testAddObjectExceedsWeight() {
+        ArrayList<String> startingItems = new ArrayList<>();
+        startingItems.add("Lookout Ring"); // Weight = 1
+        
+        Player player = new Player("John", "Doe", "GOBLIN", 100, startingItems,3);
+
+        player.addObject("Rune Staff of Curse"); // Weight = 3
+        assertFalse(player.getInventory().contains("Rune Staff of Curse"));
+    }
+
+    @Test
+    @DisplayName("Test adding a non-existent object")
+    void testAddNonExistentObject() {
+        Player player = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>(),5);
+
+        player.addObject("NonExistentItem");
+        assertFalse(player.getInventory().contains("NonExistentItem"));
+    }
+
 }
