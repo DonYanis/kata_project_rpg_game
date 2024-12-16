@@ -38,9 +38,7 @@ public class Affichage {
     private static void appendInventory(StringBuilder finalString, Player player) {
         finalString.append("\n\nInventaire :");
         player.getInventory().getObjects().forEach(item -> {
-        if (item instanceof Object) {
             finalString.append("\n   ").append(((Object) item).getName());
-        }
     });
     }
 }

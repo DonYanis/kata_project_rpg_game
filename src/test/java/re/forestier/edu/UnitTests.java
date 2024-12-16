@@ -540,7 +540,7 @@ public class UnitTests {
         
         seller.addObject("Lookout Ring");
         
-        assertTrue(seller.sellObject("Lookout Ring", buyer));
+        seller.sellObject("Lookout Ring", buyer);
         // Verify that the object is transferred
         assertTrue(buyer.getInventory().contains("Lookout Ring"));
         // Verify that money is transferred

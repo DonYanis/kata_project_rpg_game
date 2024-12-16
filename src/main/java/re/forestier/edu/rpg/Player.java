@@ -115,16 +115,14 @@ public class Player {
         inventory.clear();
     }
 
-    public boolean sellObject(String name, Player buyer) {
+    public void sellObject(String name, Player buyer) {
 
         Object objectToSell = getSellingObject(name,buyer);
-        if(objectToSell == null ) return false;
 
         UpdatePlayer.removeMoney(buyer, objectToSell.getValue());
         money+=objectToSell.getValue();
         buyer.addObject(name);
         inventory.remove(name);
-        return true;
     }
 
     private Object getSellingObject(String name, Player buyer){
