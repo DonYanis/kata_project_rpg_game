@@ -515,4 +515,58 @@ public class UnitTests {
         assertTrue(player.getInventory().isEmpty());
     }
 
+    //test before creating sell method
+    @Test
+    @DisplayName("Test: Successfully selling an object")
+    void testSellObjectSuccess() {
+        Player seller = new Player("Seller", "Warrior", "DWARF", 100, new ArrayList<>(), 1000);
+        Player buyer = new Player("Buyer", "Mage", "DWARF", 200, new ArrayList<>(), 1000);
+        Object  objectToSell = ObjectList.getObject("Lookout Ring"); 
+        
+        seller.addObject("Lookout Ring");
+        
+        assertTrue(seller.sellObject("Lookout Ring", buyer));
+        // Verify that the object is transferred
+        assertTrue(buyer.getInventory().contains("Lookout Ring"));
+        // Verify that money is transferred
+        assertEquals(200 - objectToSell.getValue(), buyer.getMoney());
+        // Verify that object is removed from seller
+        assertFalse(seller.getInventory().contains("Lookout Ring"));
+    }
+
+    @Test
+    @DisplayName("Test: Seller does not own the object")
+    void testSellObjectSellerDoesNotOwn() {
+        Player seller = new Player("Seller", "Warrior", "DWARF", 100, new ArrayList<>(), 1000);
+        Player buyer = new Player("Buyer", "Mage", "DWARF", 200, new ArrayList<>(), 1000);
+                
+        assertFalse(seller.sellObject("Nonexistent Object", buyer));
+        assertFalse(buyer.getInventory().contains("Nonexistent Object"));
+    }
+
+    @Test
+    @DisplayName("Test: Buyer does not have enough money")
+    void testSellObjectBuyerLacksMoney() {
+
+        Player seller = new Player("Seller", "Warrior", "DWARF", 100, new ArrayList<>(), 1000);
+        Player buyer = new Player("Buyer", "Mage", "DWARF", 0, new ArrayList<>(), 1000);
+        
+        seller.addObject("Lookout Ring");
+
+        assertFalse(seller.sellObject("Lookout Ring", buyer));
+        assertFalse(buyer.getInventory().contains("Lookout Ring"));
+        assertEquals(100, seller.getMoney());
+    }
+
+    @Test
+    @DisplayName("Test: Buyer does not have enough free weight")
+    void testSellObjectBuyerLacksWeight() {
+        Player seller = new Player("Seller", "Warrior", "DWARF", 100, new ArrayList<>(), 10);
+        Player buyer = new Player("Buyer", "Mage", "DWARF", 100, new ArrayList<>(), 0);
+        
+        seller.addObject("Lookout Ring");
+
+        assertFalse(seller.sellObject("Lookout Ring", buyer));
+        assertFalse(buyer.getInventory().contains("Scroll of Stupidity"));
+    }
 }
