@@ -3,6 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.exception.NoEnoughFreeWeightException;
 import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.utils.Affichage;
@@ -580,8 +581,11 @@ public class UnitTests {
         Player buyer = new Player("Buyer", "Mage", "DWARF", 100, new ArrayList<>(), 0);
         
         seller.addObject("Lookout Ring");
+        Exception exception = assertThrows(NoEnoughFreeWeightException.class, () -> {
+            seller.sellObject("Lookout Ring", buyer);
+        });
+        assertEquals("Buyer does not have enough free weight", exception.getMessage());
 
-        assertFalse(seller.sellObject("Lookout Ring", buyer));
-        assertFalse(buyer.getInventory().contains("Scroll of Stupidity"));
+        assertFalse(buyer.getInventory().contains("Lookout Ring"));
     }
 }

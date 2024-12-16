@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.avatar.AvatarClassFactory;
+import re.forestier.edu.rpg.exception.NoEnoughFreeWeightException;
 import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.object.Inventory;
@@ -136,10 +137,9 @@ public class Player {
         if (buyer.getMoney() < objectToSell.getValue()) 
             throw new NoEnoughMoneyException("Buyer does not have enough money");
 
-        if (buyer.getFreeWeight() < objectToSell.getWeight()) {
-            System.out.println("Buyer does not have enough free weight.");
-            return null;
-        }
+        if (buyer.getFreeWeight() < objectToSell.getWeight()) 
+            throw new NoEnoughFreeWeightException("Buyer does not have enough free weight");
+
         return objectToSell;
     }
 }
