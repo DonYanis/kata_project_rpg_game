@@ -3,6 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.utils.Affichage;
 import re.forestier.edu.rpg.object.*;
 import re.forestier.edu.rpg.object.Object;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -426,8 +428,10 @@ public class UnitTests {
     @Test
     @DisplayName("Test Adding Unknown Object")
     void testAddUnknownObject() {
-        inventory.addObject("Nonexistent Item",10);
-        assertFalse(inventory.contains("Nonexistent Item"));
+        Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
+            inventory.addObject("NonExistentItem", 10);
+        });
+        assertEquals("Object 'NonExistentItem' does not exist in ObjectList.", exception.getMessage());
     }
 
     @Test
@@ -499,9 +503,11 @@ public class UnitTests {
     @DisplayName("Test adding a non-existent object")
     void testAddNonExistentObject() {
         Player player = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>(),5);
-
-        player.addObject("NonExistentItem");
-        assertFalse(player.getInventory().contains("NonExistentItem"));
+        
+        Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
+            player.addObject("NonExistentItem");
+        });
+        assertEquals("Object 'NonExistentItem' does not exist in ObjectList.", exception.getMessage());
     }
 
     @Test
@@ -539,9 +545,13 @@ public class UnitTests {
     void testSellObjectSellerDoesNotOwn() {
         Player seller = new Player("Seller", "Warrior", "DWARF", 100, new ArrayList<>(), 1000);
         Player buyer = new Player("Buyer", "Mage", "DWARF", 200, new ArrayList<>(), 1000);
-                
-        assertFalse(seller.sellObject("Nonexistent Object", buyer));
-        assertFalse(buyer.getInventory().contains("Nonexistent Object"));
+        
+        Exception exception = assertThrows(ObjectNotFoundException.class, () -> {
+            seller.sellObject("NonExistentItem", buyer);
+        });
+        assertEquals("Player doesn't own 'NonExistentItem'", exception.getMessage());
+
+        assertFalse(buyer.getInventory().contains("NonExistentItem"));
     }
 
     @Test

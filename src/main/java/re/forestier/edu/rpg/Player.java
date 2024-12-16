@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.avatar.AvatarClassFactory;
+import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.object.Inventory;
 import re.forestier.edu.rpg.object.ObjectList;
 import re.forestier.edu.rpg.object.Object;
@@ -127,10 +128,8 @@ public class Player {
     }
 
     private Object getSellingObject(String name, Player buyer){
-        if (!inventory.contains(name)) {
-            System.out.println("You do not own this object.");
-            return null;
-        }
+        if (!inventory.contains(name))
+            throw new ObjectNotFoundException("Player doesn't own '" + name + "'");
 
         Object objectToSell = ObjectList.getObject(name);
         if (buyer.getMoney() < objectToSell.getValue()) {

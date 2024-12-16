@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import re.forestier.edu.rpg.exception.ObjectNotFoundException;
+
 public class Inventory {
 
     private Map<String, Object> inventory;
@@ -20,26 +22,18 @@ public class Inventory {
 
   
     public void addObject(String name, int freeWeight) {
-        if (ObjectList.contains(name)) {
-            Object object = ObjectList.getObject(name);
-            if (object.getWeight()<freeWeight)
-                inventory.put(name, object);
-        } else {
-            System.out.println("Unkown Object");
-        }
+        
+        if (!ObjectList.contains(name)) 
+            throw new ObjectNotFoundException("Object '" + name + "' does not exist in ObjectList.");
+
+        Object object = ObjectList.getObject(name);
+        if (object.getWeight()<freeWeight)
+            inventory.put(name, object);
     }
 
     public void addObjects(ArrayList<String> names, int maxWeight) {
-        for (String name : names) {
-            if (ObjectList.contains(name)) {
-                inventory.put(name, ObjectList.getObject(name));
-            } else {
-                System.out.println("Unkown Object");
-            }
-        }
-
-        if(getTotalWeight()>maxWeight)
-            System.out.println("must not exceed max weight");
+        for (String name : names)
+            addObject(name, maxWeight);
     }
 
     public boolean contains(String name) {
@@ -47,9 +41,7 @@ public class Inventory {
     }
 
     public void remove(String name) {
-        if (inventory.containsKey(name)) {
-            inventory.remove(name);
-        }
+        inventory.remove(name);
     }
 
     public Map<String, Object> getInventory() {
