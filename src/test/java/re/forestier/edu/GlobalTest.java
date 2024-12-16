@@ -1,5 +1,6 @@
 package re.forestier.edu;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import re.forestier.edu.rpg.UpdatePlayer;
@@ -19,5 +20,14 @@ public class GlobalTest {
         player.clearInventory();
 
         verify(Affichage.afficherJoueur(player));
+    }
+
+    @Test
+    @DisplayName("test print player profile in MarkDown")
+    void testAffichageMarkdown() {
+        Player player = new Player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>(),5);
+        UpdatePlayer.addXp(player, 20);
+
+        verify(Affichage.printPlayerInMarkDown(player));
     }
 }
