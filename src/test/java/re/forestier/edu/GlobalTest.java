@@ -16,6 +16,7 @@ public class GlobalTest {
     void testAffichageBase() {
         Player player = new Player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>(),5);
         UpdatePlayer.addXp(player, 20);
+        player.clearInventory();
 
         verify(Affichage.afficherJoueur(player));
     }

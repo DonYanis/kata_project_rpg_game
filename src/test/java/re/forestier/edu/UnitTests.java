@@ -250,14 +250,14 @@ public class UnitTests {
 
     @Test
     public void testAfficherJoueurInventory() {
-        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
+        Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),10);
         p.addObject("Magic Bow");
-        p.addObject("Hell Sword");
+        p.addObject("Holy Elixir");
 
         String expectedOutput = "Joueur Doe joué par John\n" +
                                 "Niveau : 1 (XP totale : 0)\n\n" +
                                 "Capacités :\n   VIS : 3\n   ATK : 3\n   CHA : 1\n   INT : 1\n\n" +
-                                "Inventaire :\n   Magic Bow\n   Hell Sword";
+                                "Inventaire :\n   Holy Elixir\n   Magic Bow";
 
         String actualOutput = Affichage.afficherJoueur(p);
 
@@ -502,6 +502,17 @@ public class UnitTests {
 
         player.addObject("NonExistentItem");
         assertFalse(player.getInventory().contains("NonExistentItem"));
+    }
+
+    @Test
+    @DisplayName("Test clearing inventory")
+    void testClearInventory() {
+        Player player = new Player("John", "Doe", "GOBLIN", 100, new ArrayList<>(),5);
+
+        player.addObject("Lookout Ring");
+        assertTrue(player.getInventory().contains("Lookout Ring"));
+        player.clearInventory();
+        assertTrue(player.getInventory().isEmpty());
     }
 
 }
