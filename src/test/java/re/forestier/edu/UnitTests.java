@@ -6,6 +6,7 @@ import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.exception.NoEnoughFreeWeightException;
 import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
+import re.forestier.edu.rpg.exception.UnknownAvatarClassException;
 import re.forestier.edu.rpg.utils.Affichage;
 import re.forestier.edu.rpg.object.*;
 import re.forestier.edu.rpg.object.Object;
@@ -72,12 +73,18 @@ public class UnitTests {
     }
 
     @Test
-    @DisplayName("test avatar class")
-    void testAvatar(){
-        
-        Player p = new Player("Florian", "Grognak le barbare", "x", 100, new ArrayList<>(),5);
-        assertThat(p.getAvatarClass(),not("x"));
+    @DisplayName("test unknown avatar class")
+    void testUnknownAvatar(){
+        Exception exception = assertThrows(UnknownAvatarClassException.class, () -> {
+            new Player("Florian", "Grognak le barbare", "NonExisitingAvatar", 100, new ArrayList<>(),5);
+        });
+        assertEquals("Avatar class 'NonExisitingAvatar' is unknown", exception.getMessage());
+    }
 
+    @Test
+    @DisplayName("test existing avatar classes")
+    void testExistingAvatar(){
+        
         Player p1 = new Player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>(),5);
         assertThat(p1.getAvatarClass(),equalTo("ARCHER"));
 

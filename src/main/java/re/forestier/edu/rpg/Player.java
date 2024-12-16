@@ -33,8 +33,6 @@ public class Player {
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.avatarClass = AvatarClassFactory.getAvatarClass(avatarClassName);
-        if (this.avatarClass == null) return;
-
         this.money = money;
         this.maxWeight = maxWeight;
         this.inventory = new Inventory(inventory, maxWeight);
@@ -62,7 +60,7 @@ public class Player {
     }
 
     public String getAvatarClass() {
-        return avatarClass != null ? avatarClass.getName() : null;
+        return avatarClass.getName();
     }
 
     public String getAvatarName() {
