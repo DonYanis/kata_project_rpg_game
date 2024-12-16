@@ -25,7 +25,7 @@ public class Dwarf implements AvatarClass {
 
     @Override
     public void applyHealthBonus(Player player) {
-        if(player.inventory.contains("Holy Elixir")) {
+        if(player.getInventory().contains("Holy Elixir")) {
             player.currentHealthPoints += 1;
         }
         player.currentHealthPoints += 1;

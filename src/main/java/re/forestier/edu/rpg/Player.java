@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.avatar.AvatarClassFactory;
+import re.forestier.edu.rpg.object.Inventory;
+import re.forestier.edu.rpg.object.ObjectList;
+import re.forestier.edu.rpg.object.Object;
 
 public class Player {
     protected String playerName;
@@ -13,15 +16,16 @@ public class Player {
 
     protected Integer money;
 
+    protected int maxWeight;
     protected int level;
     public int healthPoints;
     public int currentHealthPoints;
     protected int xp;
 
     protected HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
+    protected Inventory inventory;
 
-    public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatarName, String avatarClassName, int money, ArrayList<String> inventory, int maxWeight) {
 
         this.playerName = playerName;
         this.avatarName = avatarName;
@@ -29,7 +33,8 @@ public class Player {
         if (this.avatarClass == null) return;
 
         this.money = money;
-        this.inventory = inventory != null ? inventory : new ArrayList<>();
+        this.maxWeight = maxWeight;
+        this.inventory = new Inventory(inventory, maxWeight);
         this.level = 1;
         this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(level));
 
@@ -89,7 +94,23 @@ public class Player {
         return abilities;
     }
 
-    public ArrayList<String> getInventory() {
+    public Inventory getInventory() {
         return inventory;
+    }
+
+    public int getMaxWeight() {
+        return maxWeight;
+    }
+
+    public int getFreeWeight(){
+        return maxWeight - inventory.getTotalWeight();
+    }
+
+    public void addObject(String name) {
+        inventory.addObject(name, getFreeWeight());
+    }
+
+    public void clearInventory(){
+        inventory.clear();
     }
 }

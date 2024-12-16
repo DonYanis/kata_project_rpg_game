@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.object.Object;
 
 public class Affichage {
 
@@ -36,6 +37,10 @@ public class Affichage {
 
     private static void appendInventory(StringBuilder finalString, Player player) {
         finalString.append("\n\nInventaire :");
-        player.getInventory().forEach(item -> finalString.append("\n   ").append(item));
+        player.getInventory().getObjects().forEach(item -> {
+        if (item instanceof Object) {
+            finalString.append("\n   ").append(((Object) item).getName());
+        }
+    });
     }
 }

@@ -18,6 +18,8 @@ public class ObjectList {
         objectMap.put("Rune Staff of Curse", new Object("Rune Staff of Curse", "May burn your enemies... Or yourself. Who knows?", 3, 200));
         objectMap.put("Combat Edge", new Object("Combat Edge", "Well, that's an edge", 1, 30));
         objectMap.put("Holy Elixir", new Object("Holy Elixir", "Recover your HP", 2, 75));
+        objectMap.put("Magic Bow", new Object("Magic Bow", "Attack very far enemies", 2, 75));
+
     }
 
     public static Object getObject(String name) {
