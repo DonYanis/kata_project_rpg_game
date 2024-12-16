@@ -3,6 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.utils.Affichage;
 import re.forestier.edu.rpg.object.*;
@@ -563,7 +564,11 @@ public class UnitTests {
         
         seller.addObject("Lookout Ring");
 
-        assertFalse(seller.sellObject("Lookout Ring", buyer));
+        Exception exception = assertThrows(NoEnoughMoneyException.class, () -> {
+            seller.sellObject("Lookout Ring", buyer);
+        });
+        assertEquals("Buyer does not have enough money", exception.getMessage());
+
         assertFalse(buyer.getInventory().contains("Lookout Ring"));
         assertEquals(100, seller.getMoney());
     }

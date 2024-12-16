@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import re.forestier.edu.rpg.avatar.AvatarClass;
 import re.forestier.edu.rpg.avatar.AvatarClassFactory;
+import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.object.Inventory;
 import re.forestier.edu.rpg.object.ObjectList;
@@ -132,10 +133,8 @@ public class Player {
             throw new ObjectNotFoundException("Player doesn't own '" + name + "'");
 
         Object objectToSell = ObjectList.getObject(name);
-        if (buyer.getMoney() < objectToSell.getValue()) {
-            System.out.println("Buyer does not have enough money.");
-            return null;
-        }
+        if (buyer.getMoney() < objectToSell.getValue()) 
+            throw new NoEnoughMoneyException("Buyer does not have enough money");
 
         if (buyer.getFreeWeight() < objectToSell.getWeight()) {
             System.out.println("Buyer does not have enough free weight.");
