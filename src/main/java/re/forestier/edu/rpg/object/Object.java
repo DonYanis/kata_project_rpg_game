@@ -29,6 +29,4 @@ public class Object {
     public int getValue() {
         return value;
     }
-
-
 }
