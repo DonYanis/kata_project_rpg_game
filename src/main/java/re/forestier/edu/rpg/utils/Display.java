@@ -7,11 +7,11 @@ import java.util.Map;
 import re.forestier.edu.rpg.Player;
 import re.forestier.edu.rpg.object.Object;
 
-public class Affichage {
+public class Display {
 
     private static final List<String> ABILITY_ORDER = Arrays.asList("DEF", "VIS", "ATK", "CHA", "INT", "ALC");
 
-    public static String afficherJoueur(Player player) {
+    public static String printPlayer(Player player) {
         StringBuilder finalString = new StringBuilder();
 
         appendPlayerDetails(finalString, player);
@@ -33,20 +33,17 @@ public class Affichage {
         return profile.toString();
     }
 
-    
     private static void appendPlayerDetails(StringBuilder finalString, Player player) {
         finalString.append(String.format("Joueur %s joué par %s", player.getAvatarName(), player.getPlayerName()))
                 .append("\nNiveau : ").append(player.retrieveLevel())
                 .append(" (XP totale : ").append(player.getXp()).append(")\n\nCapacités :");
     }
 
-
     private static void appendAbilities(StringBuilder finalString, Player player) {
         ABILITY_ORDER.stream()
                 .filter(ability -> player.getAbilities().containsKey(ability)) 
                 .forEach(ability -> finalString.append("\n   ").append(ability).append(" : ").append(player.getAbilities().get(ability)));
     }
-
 
     private static void appendInventory(StringBuilder finalString, Player player) {
         finalString.append("\n\nInventaire :");

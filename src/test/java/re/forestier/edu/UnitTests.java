@@ -7,7 +7,7 @@ import re.forestier.edu.rpg.exception.NoEnoughFreeWeightException;
 import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.exception.UnknownAvatarClassException;
-import re.forestier.edu.rpg.utils.Affichage;
+import re.forestier.edu.rpg.utils.Display;
 import re.forestier.edu.rpg.object.*;
 import re.forestier.edu.rpg.object.Object;
 
@@ -251,7 +251,7 @@ public class UnitTests {
  /* Les tests ajoutés dans cette partie sont fait pour essayer de passer l'étape 'Mutation' à 100% */
 
     @Test
-    public void testAfficherJoueurInventory() {
+    public void testprintPlayerInventory() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),10);
         p.addObject("Magic Bow");
         p.addObject("Holy Elixir");
@@ -261,7 +261,7 @@ public class UnitTests {
                                 "Capacités :\n   VIS : 3\n   ATK : 3\n   CHA : 1\n   INT : 1\n\n" +
                                 "Inventaire :\n   Holy Elixir\n   Magic Bow";
 
-        String actualOutput = Affichage.afficherJoueur(p);
+        String actualOutput = Display.printPlayer(p);
 
         assertEquals(expectedOutput, actualOutput);
     }
