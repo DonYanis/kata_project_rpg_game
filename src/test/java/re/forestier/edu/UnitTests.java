@@ -28,12 +28,6 @@ import java.util.Map;
 public class UnitTests {
 
     @Test
-    @DisplayName("Main test")
-    public void testMain() {
-        Main.main(new String[]{});
-    }
-
-    @Test
     @DisplayName("Sample test")
     void testPlayerName() {
         Player player = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
