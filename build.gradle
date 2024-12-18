@@ -3,6 +3,7 @@ plugins {
     id "jacoco"
     id 'info.solidsoft.pitest' version '1.15.0'
     id 'application'
+    id "org.sonarqube" version '4.4.1.3373'
 }
 
 group = 're.forestier.edu'
@@ -30,4 +31,15 @@ test {
 
 application {
     mainClass = 're.forestier.edu.Main'
+}
+sonarqube {
+    properties {
+        property "sonar.projectKey", "kata-project"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+        property "sonar.java.binaries", "build/classes/java/main"
+        property "sonar.login", "admin"
+        property "sonar.password", "test"
+    }
 }
