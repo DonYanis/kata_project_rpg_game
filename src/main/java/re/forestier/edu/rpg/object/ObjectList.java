@@ -34,6 +34,7 @@ public class ObjectList {
         return objectMap.containsKey(name);
     }
 
+    private static final Random RANDOM = new Random();
     public static Object getRandomObject(int maxWeight) {
         List<Object> availableObjects = new ArrayList<>();
 
@@ -46,7 +47,6 @@ public class ObjectList {
             return null;
         }
 
-        Random random = new Random();
-        return availableObjects.get(random.nextInt(availableObjects.size()));
+        return availableObjects.get(RANDOM.nextInt(availableObjects.size()));
     }
 }
