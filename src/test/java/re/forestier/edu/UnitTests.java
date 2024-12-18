@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -31,9 +30,7 @@ public class UnitTests {
     @Test
     @DisplayName("Main test")
     public void testMain() {
-
         Main.main(new String[]{});
-
     }
 
     @Test
@@ -48,12 +45,9 @@ public class UnitTests {
     void testNegativeMoney() {
         Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>(),5);
 
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             UpdatePlayer.removeMoney(p, 200);
-        } catch (IllegalArgumentException e) {
-            return;
-        }
-        fail();
+        });
     }
 
     @Test
@@ -159,10 +153,8 @@ public class UnitTests {
 
         Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
         p.setCurrentHealthPoints(0);
-
         UpdatePlayer.majFinDeTour(p);
 
-        // Assert
         assertEquals("Le joueur est KO !" + System.lineSeparator(), outContent.toString()); 
     }
 
@@ -330,8 +322,6 @@ public class UnitTests {
         assertThat(p.getCurrentHealthPoints(), equalTo(2));
     }
 
-
-
     // Test before adding Goblin class : 
     @DisplayName("Test Goblin Name")
     void testGoblinName() {
@@ -476,7 +466,6 @@ public class UnitTests {
     }
 
     //tests before linking object package to project
-
     @Test
     @DisplayName("Test retrieving  maximum weight")
     void testGetMaxWeight() {
