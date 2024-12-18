@@ -25,8 +25,11 @@ public class Display {
         StringBuilder profile = new StringBuilder();
 
         appendHeader(profile, player);
+        appendLine(profile);
         appendPlayerStatus(profile, player);
+        appendLine(profile);
         appendStats(profile, player);
+        appendLine(profile);
         appendInventoryStatus(profile, player);
         appendFooter(profile);
 
@@ -56,8 +59,7 @@ public class Display {
         profile.append("## ============= PLAYER PROFILE =============  \n")
                 .append("**+ Name:** ").append(player.getPlayerName()).append("  \n")
                 .append("**+ Controlled By:** ").append(player.getAvatarName()).append("  \n")
-                .append("**+ Class:** ").append(player.getAvatarClass()).append("  \n")
-                .append("# -------------------------------------------  \n");
+                .append("**+ Class:** ").append(player.getAvatarClass()).append("  \n");
     }
 
     private static void appendPlayerStatus(StringBuilder profile, Player player) {
@@ -65,8 +67,11 @@ public class Display {
                 .append("**+ MONEY:** ").append(player.getMoney()).append(" Coins  \n")
                 .append("**+ XP:** ").append(player.getXp()).append("  \n")
                 .append("**+ HEALTH:** ").append(player.getCurrentHealthPoints()).append("/")
-                .append(player.getHealthPoints()).append(" HP  \n")
-                .append("# -------------------------------------------  \n");
+                .append(player.getHealthPoints()).append(" HP  \n");
+    }
+
+    private static void appendLine(StringBuilder profile){
+        profile.append("# -------------------------------------------  \n");
     }
 
     private static void appendStats(StringBuilder profile, Player player) {
@@ -75,7 +80,6 @@ public class Display {
         stats.forEach((key, value) -> {
             profile.append("- **[").append(key).append("]** : ").append(value).append("  \n");
         });
-        profile.append("# -------------------------------------------  \n");
     }
 
     private static void appendInventoryStatus(StringBuilder profile, Player player) {
