@@ -9,7 +9,7 @@ import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 
 public class Inventory {
 
-    private Map<String, Object> inventory;
+    private Map<String, RpgObject> inventory;
 
     public Inventory() {
         this.inventory = new HashMap<>();
@@ -26,7 +26,7 @@ public class Inventory {
         if (!ObjectList.contains(name)) 
             throw new ObjectNotFoundException("Object '" + name + "' does not exist in ObjectList.");
 
-        Object object = ObjectList.getObject(name);
+        RpgObject object = ObjectList.getObject(name);
         if (object.getWeight()<freeWeight)
             inventory.put(name, object);
     }
@@ -44,13 +44,13 @@ public class Inventory {
         inventory.remove(name);
     }
 
-    public Map<String, Object> getInventory() {
+    public Map<String, RpgObject> getInventory() {
         return new HashMap<>(inventory); 
     }
 
      public int getTotalWeight() {
         int totalWeight = 0;
-        for (Object object : inventory.values()) {
+        for (RpgObject object : inventory.values()) {
             totalWeight += object.getWeight(); 
         }
         return totalWeight;
@@ -58,7 +58,7 @@ public class Inventory {
 
     public int getTotalValue() {
         int totalValue = 0;
-        for (Object object : inventory.values()) {
+        for (RpgObject object : inventory.values()) {
             totalValue += object.getValue(); 
         }
         return totalValue;
@@ -68,7 +68,7 @@ public class Inventory {
         return inventory.isEmpty();
     }
 
-    public Collection<Object> getObjects(){
+    public Collection<RpgObject> getObjects(){
         return inventory.values();
     }
 

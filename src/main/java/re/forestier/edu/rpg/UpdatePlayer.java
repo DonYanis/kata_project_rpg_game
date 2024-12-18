@@ -3,11 +3,11 @@ package re.forestier.edu.rpg;
 import java.util.Map;
 
 import re.forestier.edu.rpg.object.ObjectList;
-import re.forestier.edu.rpg.object.Object;
+import re.forestier.edu.rpg.object.RpgObject;
 public class UpdatePlayer {
 
     private static void giveRandomObject(Player player) {
-        Object object = ObjectList.getRandomObject(player.getFreeWeight());
+        RpgObject object = ObjectList.getRandomObject(player.getFreeWeight());
         player.addObject(object.getName());
     }
     

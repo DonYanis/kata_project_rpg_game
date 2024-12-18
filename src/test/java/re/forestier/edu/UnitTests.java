@@ -9,7 +9,7 @@ import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.exception.UnknownAvatarClassException;
 import re.forestier.edu.rpg.utils.Display;
 import re.forestier.edu.rpg.object.*;
-import re.forestier.edu.rpg.object.Object;
+import re.forestier.edu.rpg.object.RpgObject;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -352,7 +352,7 @@ public class UnitTests {
     @Test
     @DisplayName("Test Object class getters")
     void testObjectGetters() {
-        Object object = new Object("Lookout Ring", "Prevents surprise attacks", 1, 50);
+        RpgObject object = new RpgObject("Lookout Ring", "Prevents surprise attacks", 1, 50);
         assertEquals("Lookout Ring", object.getName());
 
         assertEquals("Prevents surprise attacks", object.getDescription());
@@ -365,7 +365,7 @@ public class UnitTests {
     @Test
     @DisplayName("Test get object")
     void testGetObjectByName() {
-        Object object = ObjectList.getObject("Lookout Ring");
+        RpgObject object = ObjectList.getObject("Lookout Ring");
         assertNotNull(object);
         assertEquals("Lookout Ring", object.getName());
     }
@@ -373,7 +373,7 @@ public class UnitTests {
     @Test
     @DisplayName("Test get Nonexistent object")
     void testGetObjectByNameNotFound() {
-        Object object = ObjectList.getObject("Nonexistent Item");
+        RpgObject object = ObjectList.getObject("Nonexistent Item");
         assertNull(object);
     }
 
@@ -388,7 +388,7 @@ public class UnitTests {
     @Test
     @DisplayName("random object's weight should be inf or eq to given weight")
     void testGetRandomObject() {
-        Object randomObject = ObjectList.getRandomObject(2);
+        RpgObject randomObject = ObjectList.getRandomObject(2);
         assertNotNull(randomObject );
         assertTrue(randomObject.getWeight() < 2);
     }
@@ -396,7 +396,7 @@ public class UnitTests {
     @Test
     @DisplayName("Object should be null when no objects fit the weight condition")
     void testGetRandomObjectNoMatching() {
-        Object randomObject = ObjectList.getRandomObject(0);
+        RpgObject randomObject = ObjectList.getRandomObject(0);
         assertNull(randomObject);
     }
 
@@ -518,7 +518,7 @@ public class UnitTests {
     void testSellObjectSuccess() {
         Player seller = new Player("Seller", "Warrior", "DWARF", 100, new ArrayList<>(), 1000);
         Player buyer = new Player("Buyer", "Mage", "DWARF", 200, new ArrayList<>(), 1000);
-        Object  objectToSell = ObjectList.getObject("Lookout Ring"); 
+        RpgObject  objectToSell = ObjectList.getObject("Lookout Ring"); 
         
         seller.addObject("Lookout Ring");
         

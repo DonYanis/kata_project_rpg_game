@@ -10,7 +10,7 @@ import re.forestier.edu.rpg.exception.NoEnoughMoneyException;
 import re.forestier.edu.rpg.exception.ObjectNotFoundException;
 import re.forestier.edu.rpg.object.Inventory;
 import re.forestier.edu.rpg.object.ObjectList;
-import re.forestier.edu.rpg.object.Object;
+import re.forestier.edu.rpg.object.RpgObject;
 
 public class Player {
     protected String playerName;
@@ -120,7 +120,7 @@ public class Player {
 
     public void sellObject(String name, Player buyer) {
 
-        Object objectToSell = getSellingObject(name,buyer);
+        RpgObject objectToSell = getSellingObject(name,buyer);
 
         UpdatePlayer.removeMoney(buyer, objectToSell.getValue());
         money+=objectToSell.getValue();
@@ -128,11 +128,11 @@ public class Player {
         inventory.remove(name);
     }
 
-    private Object getSellingObject(String name, Player buyer){
+    private RpgObject getSellingObject(String name, Player buyer){
         if (!inventory.contains(name))
             throw new ObjectNotFoundException("Player doesn't own '" + name + "'");
 
-        Object objectToSell = ObjectList.getObject(name);
+        RpgObject objectToSell = ObjectList.getObject(name);
         if (buyer.getMoney() < objectToSell.getValue()) 
             throw new NoEnoughMoneyException("Buyer does not have enough money");
 

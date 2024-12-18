@@ -1,13 +1,13 @@
 package re.forestier.edu.rpg.object;
 
-public class Object {
+public class RpgObject {
 
     private String name;
     private String description;
     private int weight;
     private int value;
 
-    public Object(String name, String description, int weight, int value) {
+    public RpgObject(String name, String description, int weight, int value) {
         this.name = name;
         this.description = description;
         this.weight = weight;

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import re.forestier.edu.rpg.Player;
-import re.forestier.edu.rpg.object.Object;
+import re.forestier.edu.rpg.object.RpgObject;
 
 public class Display {
 
@@ -48,7 +48,7 @@ public class Display {
     private static void appendInventory(StringBuilder finalString, Player player) {
         finalString.append("\n\nInventaire :");
         player.getInventory().getObjects().forEach(item -> {
-            finalString.append("\n   ").append(((Object) item).getName());
+            finalString.append("\n   ").append(((RpgObject) item).getName());
     });
     }
 
