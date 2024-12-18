@@ -26,7 +26,8 @@ public class GlobalTest {
     @DisplayName("test print player profile in MarkDown")
     void testAffichageMarkdown() {
         Player player = new Player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>(),5);
-        UpdatePlayer.addXp(player, 20);
+        UpdatePlayer.addXp(player, 5);
+        player.addObject("Magic Bow");
 
         verify(Affichage.printPlayerInMarkDown(player));
     }
