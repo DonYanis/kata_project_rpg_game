@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id "jacoco"
     id 'info.solidsoft.pitest' version '1.15.0'
+    id 'application'
 }
 
 group = 're.forestier.edu'
@@ -25,4 +26,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass = 're.forestier.edu.Main'
 }
