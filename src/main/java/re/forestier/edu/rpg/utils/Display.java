@@ -61,7 +61,7 @@ public class Display {
     }
 
     private static void appendPlayerStatus(StringBuilder profile, Player player) {
-        profile.append("**+ LEVEL:** ").append(player.getLevel()).append("  \n")
+        profile.append("**+ LEVEL:** ").append(player.retrieveLevel()).append("  \n")
                 .append("**+ MONEY:** ").append(player.getMoney()).append(" Coins  \n")
                 .append("**+ XP:** ").append(player.getXp()).append("  \n")
                 .append("**+ HEALTH:** ").append(player.getCurrentHealthPoints()).append("/")

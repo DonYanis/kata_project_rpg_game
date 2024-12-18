@@ -20,7 +20,6 @@ public class Player {
     protected Integer money;
 
     protected int maxWeight;
-    protected int level;
     protected int healthPoints;
     protected int currentHealthPoints;
     protected int xp;
@@ -36,8 +35,7 @@ public class Player {
         this.money = money;
         this.maxWeight = maxWeight;
         this.inventory = new Inventory(inventory, maxWeight);
-        this.level = 1;
-        this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(level));
+        this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(1));
         this.healthPoints = 0;
         this.currentHealthPoints = 0;
     }
@@ -78,10 +76,6 @@ public class Player {
 
     public Integer getMoney() {
         return money;
-    }
-
-    public int getLevel() {
-        return level;
     }
 
     public int getHealthPoints() {
