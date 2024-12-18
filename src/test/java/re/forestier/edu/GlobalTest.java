@@ -28,6 +28,8 @@ public class GlobalTest {
         Player player = new Player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>(),5);
         UpdatePlayer.addXp(player, 5);
         player.addObject("Magic Bow");
+        player.setHealthPoints(100);
+        player.setCurrentHealthPoints(70);
 
         verify(Affichage.printPlayerInMarkDown(player));
     }

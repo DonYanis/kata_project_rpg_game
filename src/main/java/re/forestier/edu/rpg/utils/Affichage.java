@@ -67,8 +67,8 @@ public class Affichage {
         profile.append("**+ LEVEL:** ").append(player.getLevel()).append("  \n")
                 .append("**+ MONEY:** ").append(player.getMoney()).append(" Coins  \n")
                 .append("**+ XP:** ").append(player.getXp()).append("  \n")
-                .append("**+ HEALTH:** ").append(player.getHealthPoints()).append("/")
-                .append(player.getCurrentHealthPoints()).append(" HP  \n")
+                .append("**+ HEALTH:** ").append(player.getCurrentHealthPoints()).append("/")
+                .append(player.getHealthPoints()).append(" HP  \n")
                 .append("# -------------------------------------------  \n");
     }
 

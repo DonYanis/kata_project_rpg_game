@@ -158,7 +158,7 @@ public class UnitTests {
     public void testMajFinDeTour_PlayerKO() {
 
         Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 0; 
+        p.setCurrentHealthPoints(0);
 
         UpdatePlayer.majFinDeTour(p);
 
@@ -171,8 +171,8 @@ public class UnitTests {
     public void testMAJFinDwarfHolyElexir() {
         Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
         p.addObject("Holy Elixir");
-        p.currentHealthPoints = 1;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(1);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(3));
@@ -182,8 +182,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour : Dwarf with no holy elexir")
     public void testMAJFinDwarfNoHolyElexir() {
         Player p = new Player("John", "Doe", "DWARF", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 1;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(1);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(2));
@@ -193,8 +193,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour : Adventurer with low level")
     public void testMAJFinAdventurerLowLevel() {
         Player p = new Player("John", "Doe", "ADVENTURER", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 1;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(1);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(2));
@@ -204,8 +204,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour : Adventurer with high level")
     public void testMAJFinAdventurerHighLevel() {
         Player p = new Player("John", "Doe", "ADVENTURER", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 1;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(1);
         UpdatePlayer.addXp(p, 100);
         UpdatePlayer.majFinDeTour(p);
 
@@ -217,8 +217,8 @@ public class UnitTests {
     public void testMAJFinArcherMagicBow() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
         p.addObject("Magic Bow");
-        p.currentHealthPoints = 7;
-        p.healthPoints = 20;
+        p.setHealthPoints(20);
+        p.setCurrentHealthPoints(7);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(8));
@@ -228,8 +228,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour : ARCHER with No Magic Bow")
     public void testMAJFinArcherNoMagicBow() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 1;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(1);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(2));
@@ -239,9 +239,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour : current health must be inf or equal to health")
     public void testCurrentHealthInfEquToHealth() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 5;
-        p.healthPoints = 4;
-        UpdatePlayer.majFinDeTour(p);
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(5);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(4));
     }
@@ -250,8 +249,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour : current health doesnt change")
     public void testCurrentHealthDoesNotChange() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 3;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(3);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(3));
@@ -324,8 +323,8 @@ public class UnitTests {
     @DisplayName("MAJ fin tour Mutation : current health doesnt change")
     public void testCurrentHealthDoesNotChangeMutation() {
         Player p = new Player("John", "Doe", "ARCHER", 100, new ArrayList<>(),5);
-        p.currentHealthPoints = 2;
-        p.healthPoints = 4;
+        p.setHealthPoints(4);
+        p.setCurrentHealthPoints(2);
         UpdatePlayer.majFinDeTour(p);
 
         assertThat(p.getCurrentHealthPoints(), equalTo(2));

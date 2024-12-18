@@ -21,8 +21,8 @@ public class Player {
 
     protected int maxWeight;
     protected int level;
-    public int healthPoints;
-    public int currentHealthPoints;
+    protected int healthPoints;
+    protected int currentHealthPoints;
     protected int xp;
 
     protected HashMap<String, Integer> abilities;
@@ -38,7 +38,8 @@ public class Player {
         this.inventory = new Inventory(inventory, maxWeight);
         this.level = 1;
         this.abilities = new HashMap<>(avatarClass.getAbilitiesPerLevel().get(level));
-
+        this.healthPoints = 0;
+        this.currentHealthPoints = 0;
     }
     
     public int retrieveLevel() {
@@ -87,8 +88,16 @@ public class Player {
         return healthPoints;
     }
 
+    public void setHealthPoints(int points) {
+        healthPoints = points;
+    }
+
     public int getCurrentHealthPoints() {
         return currentHealthPoints;
+    }
+
+    public void setCurrentHealthPoints(int points) {
+        currentHealthPoints = points > healthPoints ? healthPoints : points;
     }
 
     public HashMap<String, Integer> getAbilities() {

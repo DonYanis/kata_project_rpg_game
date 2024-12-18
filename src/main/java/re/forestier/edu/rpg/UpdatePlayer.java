@@ -30,13 +30,6 @@ public class UpdatePlayer {
         newAbilities.forEach(player.abilities::put);
     }
 
-
-    private static void capHealthAtMaximum(Player player) {
-        if (player.currentHealthPoints > player.healthPoints) {
-            player.currentHealthPoints = player.healthPoints; 
-        }
-    }
-
     public static void majFinDeTour(Player player) {
 
         if (player.currentHealthPoints == 0) {
@@ -47,8 +40,6 @@ public class UpdatePlayer {
         if (player.currentHealthPoints < player.healthPoints / 2) {
             player.getAvatarClassObject().applyHealthBonus(player);
         }
-    
-        capHealthAtMaximum(player);
     }
 
     public static void removeMoney(Player player, int amount) {
