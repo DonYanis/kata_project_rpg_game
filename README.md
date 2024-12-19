@@ -6,7 +6,8 @@ A client want to integrate three new features into an existing codebase that man
 
 These software engineering concepts are implemented :
 
-- Unit testing;
-- Validation testing;
-- Test mutation;
-- Code refactoring : optimization and simplification.
+- Unit testing  
+- Test mutation  
+- Code refactoring : optimization and simplification  
+- Inegrate new functionalities with **test driven dev**  
+- Use sonarQube for code performance analysis 
